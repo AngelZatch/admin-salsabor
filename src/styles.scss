@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'imports.scss';
+
+body {
+    background-color: #F3F3F4;
+}
+
+.main {
+    padding-left: 15px !important;
+}
+
+.no-padding {
+    @include no-padding();
+}
+
+.page-title {
+    width: 100%;
+    background-color: white;
+    padding: 40px;
+}
+
+.side-menu {
+    z-index: 1029;
+}
+
+.page-contents {
+    z-index: 1028;
+}
+
+.no-data {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+}

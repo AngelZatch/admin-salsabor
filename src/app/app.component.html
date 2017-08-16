@@ -1,3 +1,12 @@
-<h1>
-  {{title}}
-</h1>
+<app-nav></app-nav>
+<div class="container-fluid no-padding">
+    <div class="row no-gutters">
+        <div class="col-lg-2 side-menu">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-lg-10 page-contents">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

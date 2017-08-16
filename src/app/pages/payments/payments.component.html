@@ -1,0 +1,45 @@
+<div class="page-title">
+    <legend>Paiements</legend>
+</div>
+<div class="main">
+    <form (ngSubmit)="getPayments()">
+        <p>Réglez les paramètres de filtrage</p>
+        <div class="row">
+            <div class="col form-group">
+                <input type="date" class="form-control" [(ngModel)]="dates.start">
+            </div>
+            <div class="col form-group">
+                <input type="date" class="form-control" [(ngModel)]="dates.end">
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-primary btn-block">Send</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-default btn-block">Export</button>
+            </div>
+        </div>
+    </form>
+    <table class="table" *ngIf="list.length > 0; else noData">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Date d'échéance</th>
+                <th>Statut encaissement</th>
+                <th>Statut bancaire</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of list">
+                <td>{{ item.methode_paiement }} ({{item.payeur_echeance}}, {{item.montant}} €)</td>
+                <td>{{ item.date_echeance }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #noData>
+        <div class="no-data">
+            <p>Aucune donnée pour cette période</p>
+        </div>
+    </ng-template>
+</div>

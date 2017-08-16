@@ -1,0 +1,47 @@
+<div class="page-title">
+    <legend>Fréquentation</legend>
+</div>
+<div class="main">
+    <form (ngSubmit)="getAttendance()">
+        <div class="container-fluid">
+            <p>Réglez les paramètres de filtrage</p>
+            <div class="row">
+                <div class="col form-group">
+                    <input type="date" class="form-control" [(ngModel)]="dates.start" name="start">
+                </div>
+                <div class="col form-group">
+                    <input type="date" class="form-control" [(ngModel)]="dates.end" name="end">
+                </div>
+                <div class="col form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Send</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-default btn-block">Export</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <table class="table" *ngIf="list.length > 0; else noData">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Dates</th>
+                <th>Groupe</th>
+                <th>Fréquentation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of list">
+                <td>{{ item.session_name }}</td>
+                <td>{{ item.session_start }} - {{ item.session_end }}</td>
+                <td>{{ item.session_group }}</td>
+                <td>{{ item.crowd }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #noData>
+        <div class="no-data">
+            <p>Aucune donnée pour cette période</p>
+        </div>
+    </ng-template>
+</div>
