@@ -6,16 +6,16 @@
         <p>Réglez les paramètres de filtrage</p>
         <div class="row">
             <div class="col form-group">
-                <input type="date" class="form-control" [(ngModel)]="dates.start">
+                <input type="date" class="form-control" [(ngModel)]="dates.start" name="start">
             </div>
             <div class="col form-group">
-                <input type="date" class="form-control" [(ngModel)]="dates.end">
+                <input type="date" class="form-control" [(ngModel)]="dates.end" name="end">
             </div>
             <div class="col">
-                <button type="button" class="btn btn-primary btn-block">Send</button>
+                <button type="submit" class="btn btn-primary btn-block">Send</button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-default btn-block">Export</button>
+                <button type="button" (click)="export()" class="btn btn-default btn-block">Export</button>
             </div>
         </div>
     </form>
