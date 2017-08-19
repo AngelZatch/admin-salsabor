@@ -14,10 +14,6 @@ export class MenuComponent implements OnInit {
     ngOnInit() {
         this.items = [
             {
-                'url': 'profits',
-                'name': 'Rentabilité'
-            },
-            {
                 'url': 'attendance',
                 'name': 'Fréquentation'
             },
