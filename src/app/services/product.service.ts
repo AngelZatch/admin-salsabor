@@ -9,11 +9,39 @@ export class ProductService {
 
     constructor(private http: Http) { }
 
+    index() {
+        return this.http.get(environment.apiUrl + '/products')
+            .map((response: Response) => {
+                return response.json();
+            })
+    }
+
     getPayments(dates) {
         return this.http.post(environment.apiUrl + '/products/payments', dates)
             .map((response: Response) => {
                 return response.json();
             });
+    }
+
+    sales(products){
+        return this.http.post(environment.apiUrl + '/products/sales', products)
+            .map((response: Response) => {
+                return response.json();
+            });
+    }
+
+    rentabilityLimited(){
+        return this.http.get(environment.apiUrl + '/products/limited')
+            .map((response: Response) => {
+                return response.json();
+            });
+    }
+
+    rentabilityUnlimited(){
+        return this.http.get(environment.apiUrl + '/products/unlimited')
+        .map((response: Response) => {
+            return response.json();
+        });
     }
 
 }
