@@ -5,7 +5,7 @@
 <div class="main">
     <div class="card card-section">
         <div class="card-body">
-            Produits à durée fixe
+            <h3>Produits à durée fixe</h3>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -13,21 +13,41 @@
                         <th>Prix de vente</th>
                         <th>Ventes</th>
                         <th>Prix réel</th>
-                        <th>Revenu</th>
+                        <th>Revenu horaire</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let product of products">
+                    <tr *ngFor="let product of volumeProducts">
                         <td>{{ product.product_name }}</td>
                         <td>{{ product.product_price }} €</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ product.sales }}</td>
+                        <td>{{ product.median_price }} €</td>
+                        <td>{{ product.hourly_rate }} €</td>
                     </tr>
                 </tbody>
             </table>
 
-            Produits illimités
+            <h3>Produits illimités</h3>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prix de vente</th>
+                        <th>Ventes</th>
+                        <th>Prix réel</th>
+                        <th>Revenu hebdomadaire</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of timeProducts">
+                        <td>{{ product.product_name }}</td>
+                        <td>{{ product.product_price }} €</td>
+                        <td>{{ product.sales }}</td>
+                        <td>{{ product.median_price }} €</td>
+                        <td>{{ product.weekly_rate }} €</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

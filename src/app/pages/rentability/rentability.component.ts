@@ -10,7 +10,9 @@ import { ProductService } from './../../services/product.service';
     providers: [ProductService]
 })
 export class RentabilityComponent implements OnInit {
-    products;
+    products = [];
+    volumeProducts = [];
+    timeProducts = [];
 
     constructor(
         productService: ProductService
@@ -19,20 +21,28 @@ export class RentabilityComponent implements OnInit {
             products => {
                 this.products = products;
                 const productsIds = _.map(this.products, 'product_id');
-                console.log(productsIds);
                 productService.sales(productsIds).subscribe(
                     sales => {
-                        console.log(sales);
                         let productSales = [];
                         for (let i = 0; i < this.products.length; i++) {
                             // Take only sales from that product
                             productSales = _.filter(sales, { id_produit_foreign: productsIds[i] });
-                            console.log(productSales);
 
                             // Run the median, add it to the products array
+                            this.products[i]['sales'] = productSales.length;
                             this.products[i]['median_price'] = this.computeMedianPrice(productSales);
+
+                            // Sort products into the 2 main categories
+                            if (this.products[i].product_size === 0) {
+                                const weeklyRate = this.products[i]['median_price'] / (this.products[i].product_validity / 7);
+                                this.products[i]['weekly_rate'] = weeklyRate.toFixed(2);
+                                this.timeProducts.push(this.products[i]);
+                            } else {
+                                const hourlyRate = this.products[i]['median_price'] / this.products[i].product_size;
+                                this.products[i]['hourly_rate'] = hourlyRate.toFixed(2);
+                                this.volumeProducts.push(this.products[i]);
+                            }
                         }
-                        console.log(this.products);
                     }
                 )
             }
@@ -49,12 +59,12 @@ export class RentabilityComponent implements OnInit {
      * @memberof RentabilityComponent
      */
     computeMedianPrice(sales) {
-        let medianPrice;
-        let i = 0;
-        _.each(sales, (sale) => {
-            i++;
-            medianPrice += sale.prix_achat / i;
+        let medianPrice = 0;
+        _.each(sales, sale => {
+            medianPrice += sale.prix_achat;
         });
+        medianPrice /= sales.length;
+        return medianPrice.toFixed(2);
     }
 
 }
