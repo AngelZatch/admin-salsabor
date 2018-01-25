@@ -30,6 +30,13 @@ export class ProductService {
             });
     }
 
+    usages(products){
+        return this.http.post(environment.apiUrl + '/products/usages', products)
+            .map((response: Response) => {
+                return response.json();
+            });
+    }
+
     rentabilityLimited(){
         return this.http.get(environment.apiUrl + '/products/limited')
             .map((response: Response) => {

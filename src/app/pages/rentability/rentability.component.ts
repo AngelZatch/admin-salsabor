@@ -20,7 +20,7 @@ export class RentabilityComponent implements OnInit {
         productService.index().subscribe(
             products => {
                 this.products = products;
-                const productsIds = _.map(this.products, 'product_id');
+                let productsIds = _.map(this.products, 'product_id');
                 productService.sales(productsIds).subscribe(
                     sales => {
                         let productSales = [];
@@ -43,6 +43,21 @@ export class RentabilityComponent implements OnInit {
                                 this.volumeProducts.push(this.products[i]);
                             }
                         }
+                        productsIds = _.map(this.timeProducts, 'product_id');
+                        productService.usages(productsIds).subscribe(
+                            usages => {
+                                let productUsages = [];
+                                for (let i = 0; i < this.timeProducts.length; i++) {
+                                    productUsages = _.filter(usages, { id_produit_foreign: this.timeProducts[i].product_id });
+
+                                    this.timeProducts[i]['usages'] = productUsages.length;
+                                    console.log(this.timeProducts[i]['hourly_rate']);
+                                    const hourlyRate = (this.timeProducts[i]['median_price'] / this.timeProducts[i]['usages']) * this.timeProducts[i]['sales'];
+                                    this.timeProducts[i]['hourly_rate'] = hourlyRate.toFixed(2);
+                                    console.log(this.timeProducts[i]['hourly_rate']);
+                                }
+                            }
+                        )
                     }
                 )
             }
