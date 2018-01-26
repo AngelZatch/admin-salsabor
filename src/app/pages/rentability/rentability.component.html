@@ -1,0 +1,74 @@
+<div class="page-title">
+    <legend>Rentabilité</legend>
+</div>
+
+<div class="main">
+    <form (ngSubmit)="get()">
+        <p>Réglez les paramètres de filtrage</p>
+        <div class="row">
+            <div class="col form-group">
+                <input type="date" class="form-control" [(ngModel)]="startDate" name="start">
+            </div>
+            <div class="col form-group">
+                <input type="date" class="form-control" [(ngModel)]="endDate" name="end">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary btn-block">Filtrer</button>
+            </div>
+            <div class="col">
+                <button type="button" (click)="export()" class="btn btn-default btn-block">Exporter</button>
+            </div>
+        </div>
+    </form>
+    <h3>Produits à durée fixe</h3>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix de vente</th>
+                <th>Ventes</th>
+                <th>Prix moyen</th>
+                <th>Revenu total</th>
+                <th>Revenu horaire</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of volumeProducts">
+                <td>{{ product.product_name }}</td>
+                <td>{{ product.product_price }} €</td>
+                <td>{{ product.sales }}</td>
+                <td>{{ product.median_price }} €</td>
+                <td>{{ product.revenue }} €</td>
+                <td>{{ product.hourly_rate }} €</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Produits illimités</h3>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix de vente</th>
+                <th>Ventes</th>
+                <th>Prix réel</th>
+                <th>Revenu total</th>
+                <th>Revenu hebdomadaire</th>
+                <th>Utilisations</th>
+                <th>Revenu horaire</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of timeProducts">
+                <td>{{ product.product_name }}</td>
+                <td>{{ product.product_price }} €</td>
+                <td>{{ product.sales }}</td>
+                <td>{{ product.median_price }} €</td>
+                <td>{{ product.revenue }} €</td>
+                <td>{{ product.weekly_rate }} €</td>
+                <td>{{ product.usages }}</td>
+                <td>{{ product.hourly_rate }} €</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

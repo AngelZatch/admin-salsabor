@@ -20,6 +20,10 @@ export class MenuComponent implements OnInit {
             {
                 'url': 'payments',
                 'name': 'Paiements'
+            },
+            {
+                'url': 'rentability',
+                'name': 'Rentabilité'
             }
         ];
     }
